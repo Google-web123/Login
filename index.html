@@ -1,0 +1,112 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Web Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 70px;
+     
+    }
+
+    #userInput {
+      width: 18px;
+    }
+
+    #profileImage {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    #userInfo {
+      font-weight: bold;
+      color: black;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    #nextButton{
+          width: 100px;
+          height: 40px;
+          border-radius: 10px;
+          margin: 5px;
+          background-color: #43425A;
+          color: white;
+          font-size: 16px;
+          border: none;
+          cursor: pointer;
+      
+    }
+
+    /* Hide file input */
+    #imageInput {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <label for="username"></label>
+    <input type="text"placeholder="اسم المستخدم" id="username" style="      
+          max-width: 300px;
+          padding: 10px;
+          " oninput="resizeInput()">
+  </div>
+<br />
+  <div>
+    <label for="profileImage"></label>
+    <!-- Use a file input for image selection -->
+    <input type="file" id="imageInput" accept="image/*" onchange="displayImage()">
+    <img src="placeholder.jpg" alt="" id="profileImage" onclick="openImageInput()">
+  </div>
+
+  <button id="nextButton" onclick="saveData()">Login</button>
+
+  <script>
+    function resizeInput() {
+      const input = document.getElementById('username');
+      input.style.width = (input.value.length + 1) * 9 + 'px';
+    }
+
+    function openImageInput() {
+      // Trigger the file input when clicking on the profile image
+      document.getElementById('imageInput').click();
+    }
+
+    function displayImage() {
+      const input = document.getElementById('imageInput');
+      const profileImage = document.getElementById('profileImage');
+
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          profileImage.src = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function saveData() {
+      const username = document.getElementById('username').value;
+      const profileImage = document.getElementById('profileImage').src;
+
+      // Save data to local storage
+      localStorage.setItem('username', username);
+      localStorage.setItem('profileImage', profileImage);
+
+      // Redirect to login.html
+      window.location.href = 'https://google-web123.github.io/Profil-/';
+    }
+  </script>
+
+</body>
+</html>
